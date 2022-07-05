@@ -1,11 +1,42 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "sqlite:///exp_pri_ecom.db"
+}
+
+model User {
+  id               Int      @id @default(autoincrement())
+  username         String
+  password         String
+  type             String
+  catalog          Catalog?
+  orders_as_seller Order[]  @relation("seller")
+  orders_as_buyer  Order[]  @relation("buyer")
+}
+
+model Product {
+  id       Int       @id @default(autoincrement())
+  name     String
+  price    Float
+  catalogs Catalog[]
+  orders   Order[]
+}
+
+model Catalog {
+  id       Int       @id @default(autoincrement())
+  user     User      @relation(fields: [user_id], references: [id])
+  user_id  Int       @unique
+  products Product[]
+}
+
+model Order {
+  id        Int       @id @default(autoincrement())
+  buyer     User      @relation("seller", fields: [buyer_id], references: [id])
+  buyer_id  Int
+  seller    User      @relation("buyer", fields: [seller_id], references: [id])
+  seller_id Int
+  products  Product[]
 }
