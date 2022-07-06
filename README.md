@@ -6,7 +6,11 @@ npm ci
 npx prisma generate
 npx prisma migrate deploy
 ```
-
+### Build
+```
+npm run build       # or
+npm run build:dev   # watch mode
+```
 ### Run
 ```
 npm run start       # or
