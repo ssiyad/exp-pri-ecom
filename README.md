@@ -7,3 +7,9 @@ npx prisma generate
 npx prisma migrate deploy
 ```
 
+### Run
+```
+npm run start       # or
+npm run start:dev   # watch mode
+```
+
