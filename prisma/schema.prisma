@@ -17,19 +17,14 @@ model User {
   orders_as_buyer  Order[]  @relation("buyer")
 }
 
-model Product {
-  id       Int       @id @default(autoincrement())
-  name     String
-  price    Float
-  catalogs Catalog[]
-  orders   Order[]
-}
-
 model Catalog {
-  id       Int       @id @default(autoincrement())
-  user     User      @relation(fields: [user_id], references: [id])
-  user_id  Int       @unique
-  products Product[]
+  id      Int     @id @default(autoincrement())
+  user    User    @relation(fields: [user_id], references: [id])
+  user_id Int     @unique
+  name    String
+  price   Float
+  deleted Boolean @default(false)
+  orders  Order[]
 }
 
 model Order {
@@ -38,5 +33,5 @@ model Order {
   buyer_id  Int
   seller    User      @relation("buyer", fields: [seller_id], references: [id])
   seller_id Int
-  products  Product[]
+  catalogs  Catalog[]
 }

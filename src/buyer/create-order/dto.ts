@@ -1,4 +1,4 @@
 export interface CreateOrderDto {
-    product_ids: number[]
+    catalog_ids: number[]
 }
 
