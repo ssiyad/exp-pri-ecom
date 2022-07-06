@@ -4,7 +4,7 @@ import { listOfSellers } from "./service";
 
 const createOrderController = Router();
 
-createOrderController.get('/create-order/:seller_id', async (req: any, res, next) => {
+createOrderController.post('/create-order/:seller_id', async (req: any, res, next) => {
     try {
         const buyer_id = req.user.id;
         const seller_id = req.params.seller_id;
