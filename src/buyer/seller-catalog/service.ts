@@ -1,7 +1,7 @@
 import { prisma } from "../../prisma/client";
 
 export async function sellerCatalog(user_id: number) {
-    return prisma.catalog.findFirst({
+    return prisma.catalog.findMany({
         where: {
             user_id,
         }
